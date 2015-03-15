@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Combos Aninhados</title>
+    </h:head>
+    <h:body>
+        <h:form id="form" > 
+            <p:panel header="Combos Aninhados com JSF2 e JPA" >
+                <h:panelGrid columns="3" >
+                    <h:outputLabel value="Provincia: *" />
+                    <h:selectOneMenu id="provincia" value="#{municipioBean.provincia}" required="true" requiredMessage="Campo obrigatório" converter="provinciaConverter" style="width: 250px;" >
+                        <f:selectItem itemLabel="Selecione" />
+                        <f:selectItems value="#{municipioBean.provincias}" var="e" itemValue="#{p}" itemLabel="#{p.nomeProvincia}" />
+                        <f:ajax render="municipio" event="change" listener="#{municipioBean.listaMunicipiosDaProvincia}" />
+                    </h:selectOneMenu>
+                    <p:message for="provincia" />
+
+                    <h:outputLabel value="Municipio: *" />
+                    <h:selectOneMenu id="municipio" value="#{municipioBean.municipio}" required="true" requiredMessage="Campo obrigatório" converter="municipioConverter" style="width: 250px;" >
+                        <f:selectItem itemLabel="Selecione" />
+                        <f:selectItems value="#{municipioBean.municipios}" var="c" itemValue="#{m}" itemLabel="#{m.nomeMunicipio}" />
+                    </h:selectOneMenu>
+                    <p:message for="municipio" />
+                </h:panelGrid>
+          
+               
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
